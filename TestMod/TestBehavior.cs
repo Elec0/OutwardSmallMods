@@ -54,14 +54,14 @@ namespace OutwardTestMod1
         public void dodgeTrigger(On.Character.orig_SendDodgeTriggerTrivial orig, Character self, Vector3 _direction)
         {
             if (self.HasDodgeDirection)
-                self.Animator.SetFloat("DodgeBlend", !self.DodgeRestricted ? 0.0f : 1f);
+                self.Animator.SetFloat("DodgeBlend", !self.DodgeRestricted ? 0.0f : 0.0f);
             self.Animator.SetTrigger("Dodge");
             if (self.CurrentlyChargingAttack)
-                ReflectionTools.GetMethod(typeof(Character), "sendCancelCharging").Invoke(self, null);
+                ReflectionTools.GetMethod(typeof(Character), "SendCancelCharging").Invoke(self, null);
             //self.sound.Play(false);
             dodging.SetValue(self, true);
 
-            ReflectionTools.GetMethod(typeof(Character), "stopBlocking").Invoke(self, null);
+            ReflectionTools.GetMethod(typeof(Character), "StopBlocking").Invoke(self, null);
 
             if (self.OnDodgeEvent != null)
                 self.OnDodgeEvent();
