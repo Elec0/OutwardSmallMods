@@ -3,24 +3,24 @@ using UnityEngine;
 
 namespace OutwardTestMod1
 {
-    public class TestMod1 : PartialityMod
+    public class DodgeOverhaulMod : PartialityMod
     {
-        public TestMod1()
+        public DodgeOverhaulMod()
         {
-            this.ModID = "Elec0's First test mod";
+            this.ModID = "Dodge Overhaul";
             this.Version = "0001";
             this.author = "Elec0";
         }
 
-        public static TestBehavior testBehavior;
+        public static DodgeBehavior testBehavior;
 
         public override void OnEnable()
         {
             base.OnEnable();
-            TestBehavior.mod = this;
+            DodgeBehavior.mod = this;
             
             GameObject obj = new GameObject();
-            testBehavior = obj.AddComponent<TestBehavior>();
+            testBehavior = obj.AddComponent<DodgeBehavior>();
             testBehavior.Initialize();
         }
 
