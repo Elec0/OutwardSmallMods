@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace OutwardTestMod1
+namespace DodgeOverhaul
 {
     static class ReflectionTools
     {

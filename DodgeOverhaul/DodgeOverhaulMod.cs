@@ -1,7 +1,7 @@
 ﻿using Partiality.Modloader;
 using UnityEngine;
 
-namespace OutwardTestMod1
+namespace DodgeOverhaul
 {
     public class DodgeOverhaulMod : PartialityMod
     {

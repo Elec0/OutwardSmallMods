@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using UnityEngine;
 
-namespace OutwardTestMod1
+namespace DodgeOverhaul
 {
     public class DodgeBehavior : MonoBehaviour
     {
