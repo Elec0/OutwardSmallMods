@@ -104,7 +104,6 @@ namespace DodgeOverhaul
             float weight = bag.Weight;
 
             cur_dodge = ((Mathf.Max(weight - (min_bag_num * cap), 0) / cap) + min_restricted_dodge) * max_dodge;
-            Debug.Log(cur_dodge);
 
             return cur_dodge;
         }

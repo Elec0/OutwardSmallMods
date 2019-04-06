@@ -26,7 +26,7 @@ namespace DodgeOverhaul
 
         public override void OnLoad()
         {
-            Debug.Log("Successfully loaded");
+            //Debug.Log("Successfully loaded");
         }
     }
 }
