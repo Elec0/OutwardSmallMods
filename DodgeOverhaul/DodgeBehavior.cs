@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using UnityEngine;
+using OModAPI;
 
 namespace DodgeOverhaul
 {

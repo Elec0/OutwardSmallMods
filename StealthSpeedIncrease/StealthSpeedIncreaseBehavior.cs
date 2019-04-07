@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 using UnityEngine;
+using OModAPI;
 
 namespace StealthSpeedIncrease
 {
@@ -25,8 +26,8 @@ namespace StealthSpeedIncrease
         public void Initialize()
         {
             // Read config file
-            ConfigHelper configHelper = new ConfigHelper("StealthSpeedConfig.xml");
-            configHelper.Mode = ConfigHelper.ConfigModes.CreateIfMissing;
+            ConfigHelper configHelper = new ConfigHelper(ConfigHelper.ConfigModes.CreateIfMissing, "StealthSpeedConfig.xml");
+            configHelper.XMLDefaultConfig = "<config><baseSneakSpeed>0.7</baseSneakSpeed><stealthTrainingBonus>1.3</stealthTrainigBonus></config>";
 
             Debug.Log("Trying to load " + configHelper.FullPath);
 
