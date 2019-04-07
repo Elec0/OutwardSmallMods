@@ -25,27 +25,14 @@ namespace StealthSpeedIncrease
         public void Initialize()
         {
             // Read config file
-            XmlDocument doc = new XmlDocument();
-            Debug.Log("Initialize Stealth");
-            string configPath = Path.Combine(Directory.GetCurrentDirectory(), "Mods\\StealthSpeedConfig.xml");
-            Debug.Log("Trying to load " + configPath);
-            try
-            {
-                doc.Load(configPath);
-                float.TryParse(doc.SelectSingleNode("/config/baseSneakSpeed").InnerText, out baseSneakSpeed);
-                float.TryParse(doc.SelectSingleNode("/config/stealthTrainingBonus").InnerText, out stealthTrainingBonus);
-                Debug.Log("Successfully loaded.");
-            }
-            catch (FileNotFoundException e)
-            {
-                Debug.Log("Config file (" + configPath + ") not found");
-                Debug.Log(e.StackTrace);
-            }
-            catch(ArgumentException e)
-            {
-                Debug.Log(configPath);
-                Debug.Log(e.StackTrace);
-            }
+            ConfigHelper configHelper = new ConfigHelper("StealthSpeedConfig.xml");
+            configHelper.Mode = ConfigHelper.ConfigModes.CreateIfMissing;
+
+            Debug.Log("Trying to load " + configHelper.FullPath);
+
+            baseSneakSpeed = configHelper.ReadFloat("/config/baseSneakSpeed");
+            stealthTrainingBonus = configHelper.ReadFloat("/config/stealthTrainingBonus");
+            Debug.Log("Successfully loaded.");            
             
             Patch();
         }
