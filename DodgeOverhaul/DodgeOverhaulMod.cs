@@ -5,6 +5,7 @@ namespace DodgeOverhaul
 {
     public class DodgeOverhaulMod : PartialityMod
     {
+        // TODO: Make minimum dodge with backpack configurable
         public DodgeOverhaulMod()
         {
             this.ModID = "Dodge Overhaul";
