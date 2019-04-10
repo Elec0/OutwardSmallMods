@@ -1,6 +1,6 @@
 
 === Installation ===
-Requirements: [url=https://github.com/PartialityModding/PartialityLauncher/releases]Partiality Launcher[/url]
+Requirements: [url=https://github.com/PartialityModding/PartialityLauncher/releases]Partiality Launcher[/url], [url=https://github.com/skully250/Outward-Mods-API/releases]Outward Mod API[/url]
 
 [list=1] 
 [*] Launch Partiality and hit "File > Open File/Exe" and select Outward.exe in your Steam install folder

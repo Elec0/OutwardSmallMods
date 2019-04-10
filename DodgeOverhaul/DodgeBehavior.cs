@@ -13,12 +13,26 @@ namespace DodgeOverhaul
         FieldInfo characterSoundManager;
         FieldInfo dodgeSoundPlayer;
 
+        private float min_dodge = 0.0f;
+        private float min_restricted_dodge = 0.2f;
+        private float min_bag_num = 0.4f; // Up to 40% of bag can be filled and not take dodge above min_restricted_dodge
+        private float max_dodge = 1.0f;
+
         public void Initialize()
         {
             hasEnoughStamina = ReflectionTools.GetMethod(typeof(Character), "HasEnoughStamina");
             dodging = ReflectionTools.GetField(typeof(Character), "m_dodging");
             characterSoundManager = ReflectionTools.GetField(typeof(Character), "m_characterSoundManager");
             dodgeSoundPlayer = ReflectionTools.GetField(typeof(Character), "m_dodgeSoundPlayer");
+
+            ConfigHelper configHelper = new ConfigHelper(ConfigHelper.ConfigModes.CreateIfMissing, "DodgeOverhaul.xml");
+            configHelper.XMLDefaultConfig = "<dodgeOverhaul><minDodge>0.0</minDodge><minRestrictedDodge>0.2</minRestrictedDodge><minBagNum>0.4</minBagNum><maxDodge>1.0</maxDodge></dodgeOverhaul>";
+            configHelper.Init();
+
+            min_dodge = configHelper.ReadFloat("/dodgeOverhaul/minDodge");
+            min_restricted_dodge = configHelper.ReadFloat("/dodgeOverhaul/minRestrictedDodge");
+            min_bag_num = configHelper.ReadFloat("/dodgeOverhaul/minBagNum");
+            max_dodge = configHelper.ReadFloat("/dodgeOverhaul/maxDodge");
 
             Patch();
         }
@@ -86,10 +100,6 @@ namespace DodgeOverhaul
 
         private float getDodgeRestrictedAmount(Character self)
         {
-            float min_dodge = 0.0f;
-            float min_restricted_dodge = 0.2f;
-            float min_bag_num = 0.4f; // Up to 40% of bag can be filled and not take dodge above min_restricted_dodge
-            float max_dodge = 1.0f;
             float cur_dodge = min_dodge;
 
             // Handle if our bag doesn't restrict us anyway

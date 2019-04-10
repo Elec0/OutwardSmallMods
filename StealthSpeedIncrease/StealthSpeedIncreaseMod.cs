@@ -8,7 +8,7 @@ namespace StealthSpeedIncrease
         public StealthSpeedIncreaseMod()
         {
             this.ModID = "Dodge Overhaul";
-            this.Version = "0001";
+            this.Version = "0002";
             this.author = "Elec0";
         }
 
