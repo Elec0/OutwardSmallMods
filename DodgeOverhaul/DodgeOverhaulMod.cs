@@ -1,33 +1,35 @@
-﻿using Partiality.Modloader;
+﻿using BepInEx;
+using BepInEx.Logging;
+using Harmony;
+using OModAPI;
+using System.Reflection;
 using UnityEngine;
 
 namespace DodgeOverhaul
 {
-    public class DodgeOverhaulMod : PartialityMod
+    [BepInPlugin(packageURL, "DodgeOverhaul", "1.0.0")]
+    public class DodgeOverhaulMod : BaseUnityPlugin
     {
-        // TODO: Make minimum dodge with backpack configurable
+        public const string packageURL = "com.elec0.outward.dodgeOverhaul";
+        public new static ManualLogSource Logger;
         public DodgeOverhaulMod()
         {
-            this.ModID = "Dodge Overhaul";
-            this.Version = "0002";
-            this.author = "Elec0";
+            Logger = base.Logger;
         }
 
-        public static DodgeBehavior testBehavior;
-
-        public override void OnEnable()
+        public void Awake()
         {
-            base.OnEnable();
-            DodgeBehavior.mod = this;
-            
-            GameObject obj = new GameObject();
-            testBehavior = obj.AddComponent<DodgeBehavior>();
-            testBehavior.Initialize();
-        }
+            ConfigHelper configHelper = new ConfigHelper(ConfigHelper.ConfigModes.CreateIfMissing, "DodgeOverhaul.xml");
+            configHelper.XMLDefaultConfig = "<dodgeOverhaul><minDodge>0.0</minDodge><minRestrictedDodge>0.2</minRestrictedDodge><minBagNum>0.4</minBagNum><maxDodge>1.0</maxDodge></dodgeOverhaul>";
+            configHelper.Init();
 
-        public override void OnLoad()
-        {
-            //Debug.Log("Successfully loaded");
+            SendDodgeTriggerTrivial.min_dodge = configHelper.ReadFloat("/dodgeOverhaul/minDodge");
+            SendDodgeTriggerTrivial.min_restricted_dodge = configHelper.ReadFloat("/dodgeOverhaul/minRestrictedDodge");
+            SendDodgeTriggerTrivial.min_bag_num = configHelper.ReadFloat("/dodgeOverhaul/minBagNum");
+            SendDodgeTriggerTrivial.max_dodge = configHelper.ReadFloat("/dodgeOverhaul/maxDodge");
+
+            var harmony = HarmonyInstance.Create(packageURL);
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
     }
 }
