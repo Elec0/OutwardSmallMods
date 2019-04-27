@@ -3,7 +3,7 @@ using BepInEx.Logging;
 using Harmony;
 using OModAPI;
 using System.Reflection;
-using UnityEngine;
+using System.IO;
 
 namespace DodgeOverhaul
 {
@@ -19,7 +19,7 @@ namespace DodgeOverhaul
 
         public void Awake()
         {
-            ConfigHelper configHelper = new ConfigHelper(ConfigHelper.ConfigModes.CreateIfMissing, "DodgeOverhaul.xml");
+            ConfigHelper configHelper = new ConfigHelper(ConfigHelper.ConfigModes.CreateIfMissing, "DodgeOverhaul.xml", Path.Combine(Directory.GetCurrentDirectory(), "BepInEx\\config"));
             configHelper.XMLDefaultConfig = "<dodgeOverhaul><minDodge>0.0</minDodge><minRestrictedDodge>0.2</minRestrictedDodge><minBagNum>0.4</minBagNum><maxDodge>1.0</maxDodge></dodgeOverhaul>";
             configHelper.Init();
 
